@@ -1,3 +1,6 @@
+
+![PHP >= 5.3.0](https://img.shields.io/badge/php-%3E%3D5.3.0-blue.svg "PHP >= 5.3.0")
+
 # pulsar-php
 Let you get JSON result from an API in a breeze (without using curl)
 
