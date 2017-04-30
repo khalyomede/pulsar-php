@@ -71,7 +71,7 @@ If for example you design a blank PHP project (cron, ...), this section will adr
 		'userId' => 1
 	];
 
-	$response = Api::put('https://jsonplaceholder.typicode.com/posts/1', $updatedResource);
+	$response = Pulsar::put('https://jsonplaceholder.typicode.com/posts/1', $updatedResource);
 
 	var_dump( $response );
 ?>
