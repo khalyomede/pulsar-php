@@ -3,7 +3,7 @@
     "description": "Let you get JSON result from an API in a breeze (without using curl)",
     "type": "library",
     "license": "MIT",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
     	"php" : ">=5.3.0"
     },
