@@ -211,9 +211,12 @@
 		 * 
 		 * @return Khalyomede\Pulsar
 		 * @example $pulsar->clean();
+		 * @return Khalyomede\Pulsar
 		 */
 		public function clean() {
 			$this->data = [];
+
+			return $this;
 		}
 
 		private function startDuration() {
