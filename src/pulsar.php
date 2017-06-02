@@ -245,7 +245,7 @@
 			$responseContent = [];			
 
 			if( $this->object ) {
-				$responseContent = json_decode(file_get_contents( $url, false, $context ));	
+				$responseContent = (object) json_decode(file_get_contents( $url, false, $context ));	
 			}
 			else {
 				$responseContent = json_decode(file_get_contents( $url, false, $context ), true);	
