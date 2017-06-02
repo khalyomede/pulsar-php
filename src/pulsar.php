@@ -207,6 +207,17 @@
 		}	
 
 		/**
+		 * Update the resource of an api using HTTP/PATCH
+		 *
+		 * @param string $endpoint the last part of the URL to call an api (not the root)
+		 * @return array | object
+		 * @example $pulsar->url("https://jsonplaceholder.typicode.com")->patch("/posts/1");
+		 */
+		public function patch( $endpoint ) {	
+			return $this->response('PATCH', $this->sanitizeEndpoint( $endpoint ));
+		}
+
+		/**
 		 * Remove all the data stored
 		 * 
 		 * @return Khalyomede\Pulsar
