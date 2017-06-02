@@ -242,12 +242,13 @@
 		}
 
 		private function content( $url, $context ) {
-			$responseContent = [];
-
-			$responseContent = json_decode(file_get_contents( $url, false, $context ));	
+			$responseContent = [];			
 
 			if( $this->object ) {
-				$responseContent = (object) $responseContent;
+				$responseContent = json_decode(file_get_contents( $url, false, $context ));	
+			}
+			else {
+				$responseContent = json_decode(file_get_contents( $url, false, $context ), true);	
 			}
 			
 			return $responseContent;			
