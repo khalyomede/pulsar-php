@@ -174,7 +174,7 @@
 		}
 
 		/**
-		 * Set the response of an api using HTTP/POST
+		 * Set the resource of an api using HTTP/POST
 		 *
 		 * @param string $endpoint the last part of the URL to call an api (not the root)
 		 * @return array | object
@@ -182,6 +182,17 @@
 		 */
 		public function post( $endpoint ) {	
 			return $this->response('POST', $this->sanitizeEndpoint( $endpoint ));
+		}
+
+		/**
+		 * Update the resource of an api using HTTP/PUT
+		 *
+		 * @param string $endpoint the last part of the URL to call an api (not the root)
+		 * @return array | object
+		 * @example $pulsar->url("https://jsonplaceholder.typicode.com")->put("/posts/1");
+		 */
+		public function put( $endpoint ) {	
+			return $this->response('PUT', $this->sanitizeEndpoint( $endpoint ));
 		}		
 
 		private function startDuration() {
