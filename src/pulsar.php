@@ -173,6 +173,17 @@
 			return $this->response('GET', $this->sanitizeEndpoint( $endpoint ));			
 		}
 
+		/**
+		 * Set the response of an api using HTTP/POST
+		 *
+		 * @param string $endpoint the last part of the URL to call an api (not the root)
+		 * @return array | object
+		 * @example $pulsar->url("https://jsonplaceholder.typicode.com")->post("/posts");
+		 */
+		public function post( $endpoint ) {	
+			return $this->response('POST', $this->sanitizeEndpoint( $endpoint ));
+		}		
+
 		private function startDuration() {
 			return microtime(true);
 		}
@@ -181,9 +192,7 @@
 			return microtime(true) - $start;
 		}
 
-		public function post( $endpoint ) {	
-			return $this->response('POST', $this->sanitizeEndpoint( $endpoint ));
-		}
+		
 
 		private function sanitizeEndpoint( $endpoint ) {
 			$point = (string) $endpoint;
