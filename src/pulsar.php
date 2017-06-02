@@ -206,6 +206,16 @@
 			return $this->response('DELETE', $this->sanitizeEndpoint( $endpoint ));
 		}	
 
+		/**
+		 * Remove all the data stored
+		 * 
+		 * @return Khalyomede\Pulsar
+		 * @example $pulsar->clean();
+		 */
+		public function clean() {
+			$this->data = [];
+		}
+
 		private function startDuration() {
 			return microtime(true);
 		}
