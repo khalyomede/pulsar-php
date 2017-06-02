@@ -193,7 +193,18 @@
 		 */
 		public function put( $endpoint ) {	
 			return $this->response('PUT', $this->sanitizeEndpoint( $endpoint ));
-		}		
+		}
+
+		/**
+		 * Delete the resource of an api using HTTP/DELETE
+		 *
+		 * @param string $endpoint the last part of the URL to call an api (not the root)
+		 * @return array | object
+		 * @example $pulsar->url("https://jsonplaceholder.typicode.com")->delete("/posts/1");
+		 */
+		public function delete( $endpoint ) {	
+			return $this->response('DELETE', $this->sanitizeEndpoint( $endpoint ));
+		}	
 
 		private function startDuration() {
 			return microtime(true);
