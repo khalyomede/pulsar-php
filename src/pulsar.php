@@ -7,6 +7,7 @@
 		public $url;
 		public $object;
 		public $duration;
+		public $json;
 
 		/**
 		 * Constructor
@@ -14,10 +15,9 @@
 		public function __construct() {
 			$this->headers = [];
 			$this->headers['Content-type'] = 'application/x-www-form-urlencoded';
-
 			$this->data = [];
-
 			$this->object = false;
+			$this->json = false;
 		}
 
 		/**
@@ -227,7 +227,17 @@
 			return microtime(true) - $start;
 		}
 
-		
+		public function dataTypeText() {
+			$this->json = false;
+
+			return $this;
+		}
+
+		public function dataTypeJson() {
+			$this->json = true;
+
+			return $this;
+		}
 
 		private function sanitizeEndpoint( $endpoint ) {
 			$point = (string) $endpoint;
@@ -256,11 +266,13 @@
 		}
 
 		private function streamContextOptions( $method ) {
+			$data = $this->json ? json_encode( $this->buildData() ) : http_build_query( $this->buildData() );
+
 			return [
 				'http' => [
 			        'header'  => $this->buildHeaders(),
 			        'method'  => $method,
-        			'content' => http_build_query( $this->buildData() )
+        			'content' => $data
 			    ]
 			];
 		}
