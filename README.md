@@ -1,83 +1,52 @@
+# Pulsar-php
 
-![PHP >= 5.3.0](https://img.shields.io/badge/php-%3E%3D5.3.0-blue.svg "PHP >= 5.3.0")
+API request and response, without using CURL.
 
-# pulsar-php
-Let you get JSON result from an API in a breeze (without using curl)
+![Packagist](https://img.shields.io/packagist/v/khalyomede/pulsar-php.svg)
+![PHP from Packagist](https://img.shields.io/packagist/php-v/khalyomede/pulsar-php.svg)
+![Packagist](https://img.shields.io/packagist/l/khalyomede/pulsar-php.svg)
 
-## Why creating Pulsar ?
-I did not wanted to use any curl commands, and I wanted an simple API that specificaly adress JSON API data retreiving.
+## Summary
+
+- [Installation](#installation)
+- [PHP support](#php-support)
+- [Examples](#examples)
 
 ## Installation
 
-### 1. With Composer
-You can both require my project via a command line command or manually.
+In your project, add the following dependency:
 
-#### Via the prompt command
-Navigate to your project folder, and type :
 ```bash
-composer require khalyomede/pulsar-php
-```
-This will download all the necessaries file to use my library, and reload the autoload requirer.
-
-#### Manually (advanced user)
-You can edit your `composer.json` file to require a specific version of Pulsar :
-```json
-{
-    "name": "Johndoe/myproject",
-    "description": "my project description",
-    "type": "library",
-    "license": "MIT",
-    "minimum-stability": "dev",
-    "require": {
-    	"php" : ">=5.3.0",
-    	"khalyomede/pulsar-php" : "0.0.1"
-    }
-}
+composer require khalyomede/pulsar-php:2.*
 ```
 
-### 2. Without Composer
-If for example you design a blank PHP project (cron, ...), this section will adress your issue. Please ensure your PHP version runing is equal or above to `5.3.X`.
+## PHP support
 
-- Download the zip folder of my project from https://github.com/khalyomede/pulsar-php
-- Copy the content of the file located at `zip/src/pulsar.php`
-- Paste it on your dedicated class folder (to create one is highly recommended) to a file named `class.pulsar.php` (or any name following your class convention)
-- Remove the line n°2 containing `namespace Khalyomede;`
-- Include it in your files using `include_once('classfolder/class.pulsar.php)`
-- You are ready to use the project using the command described below
+To use this library for PHP 5.3+ until 5.6, use the version `1.*` of this library. Note the version 1 is no longer maintainted.
 
-## Usage
-### Retreiving the content of a resource through a JSON API (GET)
+## Examples
+
+- [Fetch an API content throught GET](#fetch-an-api-content-through-get)
+
+### Fetch an API content throught GET
+
 ```php
-<?php
-	// Do not foget to you call the autoload.php if needed
+require(__DIR__ . '/../vendor/autoload.php');
 
-	use Khalyomede\Pulsar;
-	// Or 
-	include_once('classfolder/class.pulsar.php');
+$content = pulsar()->get('https://jsonplaceholder.typicode.com/posts/1');
 
-	$response = Pulsar::get('https://jsonplaceholder.typicode.com/posts/1');
-
-	var_dump( $response );
-?>
+print_r($content);
 ```
 
-### Altering the content of a resource through a JSON API (PUT)
 ```php
-<?php
-	$updatedResource = [
-		'id' => 1,
-		'title' => 'foo',
-		'body' => 'bar',
-		'userId' => 1
-	];
-
-	$response = Pulsar::put('https://jsonplaceholder.typicode.com/posts/1', $updatedResource);
-
-	var_dump( $response );
-?>
+stdClass Object
+(
+    [userId] => 1
+    [id] => 1
+    [title] => sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+    [body] => quia et suscipit
+suscipit recusandae consequuntur expedita et cum
+reprehenderit molestiae ut ut quas totam
+nostrum rerum est autem sunt rem eveniet architecto
+)
 ```
-
-## Changelog
-|Date|Issue|
-|---|---|
-|30 april 2017|First version online|

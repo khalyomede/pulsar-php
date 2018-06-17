@@ -10,6 +10,9 @@
     "autoload" : {
     	"psr-4" : {
     		"Khalyomede\\" : "src/"
-    	}
+        },
+        "files": [
+            "src/function/pulsar.php"
+        ]
     }
 }
