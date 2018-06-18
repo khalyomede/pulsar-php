@@ -28,5 +28,29 @@
                 expect($response->code())->toBe()->an('int');
             });
         });
+
+        describe('post', function() {
+            $response = pulsar()->data(['title' => 'New in PHP 7.2', 'body' => 'Lorem ipsum.', 'userId' => 1])->post('https://jsonplaceholder.typicode.com/posts');
+            
+
+            it('should return a status code as an integer', function() use($response) {
+                expect($response->code())->toBe()->an('int');
+            });
+
+            it('should return an object representing the response', function() use($response) {
+                $expected = json_decode('{
+                    "title": "New in PHP 7.2",
+                    "userId": "1",
+                    "body": "Lorem ipsum.",
+                    "id": 101
+                }');
+                
+                expect($response->content())->toBe()->equalTo($expected);
+            });
+
+            it('should return an array if the option has been set', function() use($response) {
+                expect($response->toArray()->content())->toBe()->an('array');
+            });
+        });
     });
 ?>

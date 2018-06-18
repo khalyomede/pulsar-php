@@ -21,6 +21,13 @@
 		const PROTOCOL_GET = 'GET';
 
 		/**
+		 * POST protocol.
+		 * 
+		 * @var string
+		 */
+		const PROTOCOL_POST = 'POST';
+
+		/**
 		 * Mime type JSON
 		 * 
 		 * @var string
@@ -35,14 +42,49 @@
 		const DO_NOT_USE_INCLUDE_PATH = false;
 
 		/**
+		 * Stores data that will be sent along with the request.
+		 * 
+		 * @var array<array>
+		 */
+		protected $data;
+
+		/**
+		 * Constructor.
+		 */
+		public function __construct() {
+			$this->data = [];
+		}
+
+		/**
 		 * Get the response of an API endpoint.
 		 * 
 		 * @param string	$endpoint	The URL to ask for data.
 		 * @return Khalyomede\Response
-		 * @throws InvalidArgumentException
 		 */
 		public function get(string $endpoint) {
 			return $this->request(static::PROTOCOL_GET, $endpoint);
+		}
+
+		/**
+		 * Send a request et get the response of an endpoint that accept POST protocol.
+		 * 
+		 * @param string	$endpoint	The URL to request.
+		 * @return Khalyomede\Response
+		 */
+		public function post(string $endpoint) {
+			return $this->request(static::PROTOCOL_POST, $endpoint);
+		}
+
+		/**
+		 * Stores some data to be sent along with the request (useful with POST for instance).
+		 * 
+		 * @param array<array>
+		 * @return Khalyomede\Pulsar
+		 */
+		public function data(array $array): Pulsar {
+			$this->data = $array;
+
+			return $this;
 		}
 
 		/**
@@ -82,23 +124,41 @@
 		 * @return resource
 		 */
 		private function context(string $protocol) {
-			return stream_context_create([
+			$context = [
 				'http' => [
 					'method' => $protocol,
-					'header' => $this->headers()
+					'header' => $this->headers($protocol)
+				],
+				'ssl' => [
+					'verify_peer' => false,
+					'verify_peer_name' => false
 				]
-			]);
+			];
+
+			if( $protocol === static::PROTOCOL_POST ) {
+				$context['http']['content'] = http_build_query($this->data);
+			}
+
+			return stream_context_create($context);
 		}
 
 		/**
 		 * Return a string containing the necessary headers.
 		 * 
+		 * @param string	$protocol	The HTTP protocol to send the request through.
 		 * @return string
 		 */
-		private function headers() {
+		private function headers(string $protocol) {
 			$headers = [
 				'Accept' => static::MIME_JSON
 			];
+
+			if( $protocol === static::PROTOCOL_POST ) {
+				$data = http_build_query($this->data);
+
+				$headers['Content-type'] = 'application/x-www-form-urlencoded';
+				$headers['Content-Length'] = strlen($data);
+			}
 
 			return implode("\r\n", array_map(function($key, $value) {
 				return "$key: $value";

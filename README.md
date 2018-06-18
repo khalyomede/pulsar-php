@@ -29,6 +29,7 @@ To use this library for PHP 5.3+ until 5.6, use the version `1.*` of this librar
 - [Fetch an API content throught GET](#fetch-an-api-content-through-get)
 - [Get the response as an array](#get-the-response-as-an-array)
 - [Get the HTTP status code](#get-the-http-status-code)
+- [Sending a POST request](#sending-a-post-request)
 
 ### Fetch an API content throught GET
 
@@ -110,4 +111,28 @@ echo $response->code();
 
 ```bash
 200
+```
+
+### Sending a POST request
+
+```php
+require(__DIR__ . '/../vendor/autoload.php');
+
+$response = pulsar()->data([
+    'title' => 'Test your PHP libraries with Matcha',
+    'userId' => 1,
+    'body' => 'Lorem ipsum'
+])->post('https://jsonplaceholder.typicode.com/posts');
+
+print_r($response->content());
+```
+
+```php
+stdClass Object
+(
+    [title] => Test your PHP libraries with Matcha
+    [userId] => 1
+    [body] => Lorem ipsum
+    [id] => 101
+)
 ```
