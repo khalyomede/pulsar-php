@@ -55,10 +55,10 @@ print_r($content);
 ```php
 stdClass Object
 (
-    [userId] => 1
-    [id] => 1
-    [title] => sunt aut facere repellat provident occaecati excepturi optio reprehenderit
-    [body] => quia et suscipit
+  [userId] => 1
+  [id] => 1
+  [title] => sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+  [body] => quia et suscipit
 suscipit recusandae consequuntur expedita et cum
 reprehenderit molestiae ut ut quas totam
 nostrum rerum est autem sunt rem eveniet architecto
@@ -100,10 +100,10 @@ print_r($array);
 ```php
 Array
 (
-    [userId] => 1
-    [id] => 1
-    [title] => sunt aut facere repellat provident occaecati excepturi optio reprehenderit
-    [body] => quia et suscipit
+  [userId] => 1
+  [id] => 1
+  [title] => sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+  [body] => quia et suscipit
 suscipit recusandae consequuntur expedita et cum
 reprehenderit molestiae ut ut quas totam
 nostrum rerum est autem sunt rem eveniet architecto
@@ -130,9 +130,9 @@ echo $response->code();
 require(__DIR__ . '/../vendor/autoload.php');
 
 $response = pulsar()->data([
-    'title' => 'Test your PHP libraries with Matcha',
-    'userId' => 1,
-    'body' => 'Lorem ipsum'
+  'title' => 'Test your PHP libraries with Matcha',
+  'userId' => 1,
+  'body' => 'Lorem ipsum'
 ])->post('https://jsonplaceholder.typicode.com/posts');
 
 print_r($response->content());
@@ -141,10 +141,10 @@ print_r($response->content());
 ```php
 stdClass Object
 (
-    [title] => Test your PHP libraries with Matcha
-    [userId] => 1
-    [body] => Lorem ipsum
-    [id] => 101
+  [title] => Test your PHP libraries with Matcha
+  [userId] => 1
+  [body] => Lorem ipsum
+  [id] => 101
 )
 ```
 
@@ -162,6 +162,28 @@ echo $response->code();
 
 ```bash
 404
+```
+
+### Sending a PATCH request
+
+```php
+require(__DIR__ . '/../vendor/autoload.php');
+
+$response = pulsar()->data([
+  'name' => 'morpheus',
+  'job' => 'zion resident'
+])->patch('https://reqres.in/api/users/2');
+
+print_r($response->content());
+```
+
+```php
+stdClass Object
+(
+  [name] => morpheus
+  [job] => zion resident
+  [updatedAt] => 2018-06-18T21:29:15.334Z
+)
 ```
 
 ## Credits

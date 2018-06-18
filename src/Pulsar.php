@@ -28,6 +28,13 @@
 		const PROTOCOL_POST = 'POST';
 
 		/**
+		 * PATCH protocol.
+		 * 
+		 * @var string
+		 */
+		const PROTOCOL_PATCH = 'PATCH';
+
+		/**
 		 * Mime type JSON
 		 * 
 		 * @var string
@@ -73,6 +80,13 @@
 		 */
 		public function post(string $endpoint) {
 			return $this->request(static::PROTOCOL_POST, $endpoint);
+		}
+
+		/**
+		 * 
+		 */
+		public function patch(string $endpoint): Response {
+			return $this->request(static::PROTOCOL_PATCH, $endpoint);
 		}
 
 		/**
@@ -138,7 +152,7 @@
 				]
 			];
 
-			if( $protocol === static::PROTOCOL_POST ) {
+			if( $protocol === static::PROTOCOL_POST || $protocol === static::PROTOCOL_PATCH ) {
 				$context['http']['content'] = http_build_query($this->data);
 			}
 
@@ -156,7 +170,7 @@
 				'Accept' => static::MIME_JSON
 			];
 
-			if( $protocol === static::PROTOCOL_POST ) {
+			if( $protocol === static::PROTOCOL_POST || $protocol === static::PROTOCOL_PATCH ) {
 				$data = http_build_query($this->data);
 
 				$headers['Content-type'] = 'application/x-www-form-urlencoded';

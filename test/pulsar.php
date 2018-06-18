@@ -64,5 +64,17 @@
                 expect($response->content())->toBe()->equalTo(new StdClass);
             });
         });
+
+        describe('patch', function() {
+            $response = pulsar()->data(['name' => 'morpheus', 'job' => 'zion resident'])->patch('https://reqres.in/api/users/2');
+
+            it('should return the patch response', function() use($response) {
+                expect($response->content())->toBe()->an('object');
+            });
+
+            it('should return an array if the option is set', function() use($response) {
+                expect($response->toArray()->content())->toBe()->an('array');
+            });
+        });
     });
 ?>
