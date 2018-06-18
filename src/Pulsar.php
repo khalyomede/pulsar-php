@@ -35,6 +35,13 @@
 		const PROTOCOL_PATCH = 'PATCH';
 
 		/**
+		 * DELETE protocol.
+		 * 
+		 * @var string
+		 */
+		const PROTOCOL_DELETE = 'DELETE';
+
+		/**
 		 * Mime type JSON
 		 * 
 		 * @var string
@@ -83,10 +90,23 @@
 		}
 
 		/**
+		 * Send a PATCH request to the endpoint.
 		 * 
+		 * @param string	$endpoint	The URL to request.
+		 * @return Khalyomede\Response
 		 */
 		public function patch(string $endpoint): Response {
 			return $this->request(static::PROTOCOL_PATCH, $endpoint);
+		}
+
+		/**
+		 * Send a DELETE request to the endpoint.
+		 * 
+		 * @param string	$endpoint	The URL to request.
+		 * @return Khalyomede\Response
+		 */
+		public function delete(string $endpoint): Response {
+			return $this->request(static::PROTOCOL_DELETE, $endpoint);
 		}
 
 		/**

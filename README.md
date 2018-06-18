@@ -36,13 +36,15 @@ To use this library for PHP 5.3+ until 5.6, use the version `1.*` of this librar
 
 ## Examples
 
-- [Fetch an API content throught GET](#fetch-an-api-content-through-get)
+- [Sending a GET request](#sending-a-get-request)
+- [Sending a POST request](#sending-a-post-request)
+- [Sending a PATCH request](#sending-a-patch-request)
+- [Sending a DELETE request](#sending-a-delete-request)
+- [Sending a request to a non existing endpoint](#sending-a-request-to-a-non-existing-endpoint)
 - [Get the response as an array](#get-the-response-as-an-array)
 - [Get the HTTP status code](#get-the-http-status-code)
-- [Sending a POST request](#sending-a-post-request)
-- [Sending a request to a non existing endpoint](#sending-a-request-to-a-non-existing-endpoint)
 
-### Fetch an API content throught GET
+### Sending a GET request
 
 ```php
 require(__DIR__ . '/../vendor/autoload.php');
@@ -63,6 +65,82 @@ suscipit recusandae consequuntur expedita et cum
 reprehenderit molestiae ut ut quas totam
 nostrum rerum est autem sunt rem eveniet architecto
 )
+```
+
+### Sending a POST request
+
+```php
+require(__DIR__ . '/../vendor/autoload.php');
+
+$response = pulsar()->data([
+  'title' => 'Test your PHP libraries with Matcha',
+  'userId' => 1,
+  'body' => 'Lorem ipsum'
+])->post('https://jsonplaceholder.typicode.com/posts');
+
+print_r($response->content());
+```
+
+```php
+stdClass Object
+(
+  [title] => Test your PHP libraries with Matcha
+  [userId] => 1
+  [body] => Lorem ipsum
+  [id] => 101
+)
+```
+
+### Sending a PATCH request
+
+```php
+require(__DIR__ . '/../vendor/autoload.php');
+
+$response = pulsar()->data([
+  'name' => 'morpheus',
+  'job' => 'zion resident'
+])->patch('https://reqres.in/api/users/2');
+
+print_r($response->content());
+```
+
+```php
+stdClass Object
+(
+  [name] => morpheus
+  [job] => zion resident
+  [updatedAt] => 2018-06-18T21:29:15.334Z
+)
+```
+
+### Sending a DELETE request
+
+```php
+require(__DIR__ . '/../vendor/autoload.php');
+
+$response = pulsar()->delete('https://reqres.in/api/users/2');
+
+echo $response->code();
+```
+
+```php
+204
+```
+
+### Sending a request to a non existing endpoint
+
+In this case, you will always get a `404` status code and an empty response.
+
+```php
+require(__DIR__ . '/../vendor/autoload.php');
+
+$response = pulsar()->get('https://a-non-existing-domain-hopefully.com/api/v1/post');
+
+echo $response->code();
+```
+
+```bash
+404
 ```
 
 ### Get the response as an array
@@ -122,68 +200,6 @@ echo $response->code();
 
 ```bash
 200
-```
-
-### Sending a POST request
-
-```php
-require(__DIR__ . '/../vendor/autoload.php');
-
-$response = pulsar()->data([
-  'title' => 'Test your PHP libraries with Matcha',
-  'userId' => 1,
-  'body' => 'Lorem ipsum'
-])->post('https://jsonplaceholder.typicode.com/posts');
-
-print_r($response->content());
-```
-
-```php
-stdClass Object
-(
-  [title] => Test your PHP libraries with Matcha
-  [userId] => 1
-  [body] => Lorem ipsum
-  [id] => 101
-)
-```
-
-### Sending a request to a non existing endpoint
-
-In this case, you will always get a `404` status code and an empty response.
-
-```php
-require(__DIR__ . '/../vendor/autoload.php');
-
-$response = pulsar()->get('https://a-non-existing-domain-hopefully.com/api/v1/post');
-
-echo $response->code();
-```
-
-```bash
-404
-```
-
-### Sending a PATCH request
-
-```php
-require(__DIR__ . '/../vendor/autoload.php');
-
-$response = pulsar()->data([
-  'name' => 'morpheus',
-  'job' => 'zion resident'
-])->patch('https://reqres.in/api/users/2');
-
-print_r($response->content());
-```
-
-```php
-stdClass Object
-(
-  [name] => morpheus
-  [job] => zion resident
-  [updatedAt] => 2018-06-18T21:29:15.334Z
-)
 ```
 
 ## Credits
