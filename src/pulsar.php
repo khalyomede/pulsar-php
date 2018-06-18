@@ -34,14 +34,51 @@
 		const DO_NOT_USE_INCLUDE_PATH = false;
 
 		/**
+		 * Settle that we want to retrieve the json content as an array.
+		 * The default behavior would be to return an object.
+		 * 
+		 * @var bool
+		 */
+		protected $fetch_content_as_array;
+
+		/**
+		 * Constructor.
+		 */
+		public function __construct() {
+			$this->fetch_content_as_array = false;
+		}
+
+		/**
 		 * Get the response of an API endpoint.
 		 * 
 		 * @param string	$endpoint	The URL to ask for data.
-		 * @return mixed
+		 * @return array|object
 		 * @throws InvalidArgumentException
 		 */
 		public function get(string $endpoint) {
 			return $this->request(static::PROTOCOL_GET, $endpoint);
+		}
+
+		/**
+		 * Turn the response into an array instead of an object.
+		 * 
+		 * @return Khalyomede\Pulsar
+		 */
+		public function toArray(): Pulsar {
+			$this->fetch_content_as_array = true;
+			
+			return $this;
+		}
+
+		/**
+		 * Turn the response into an object. This is the default behavior if you did not used Pulsar::toArray().
+		 * 
+		 * @return Khalyomede\Pulsar
+		 */
+		public function toObject(): Pulsar {
+			$this->fetch_content_as_array = false;
+			
+			return $this;
 		}
 
 		/**
@@ -53,7 +90,8 @@
 		 */
 		private function request(string $protocol, string $endpoint) {
 			return json_decode(
-				$this->response($protocol, $endpoint)
+				$this->response($protocol, $endpoint),
+				$this->fetch_content_as_array
 			);
 		}
 
