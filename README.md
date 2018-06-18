@@ -22,7 +22,7 @@ composer require khalyomede/pulsar-php:3.*
 
 ## PHP support
 
-To use this library for PHP 5.3+ until 5.6, use the version `1.*` of this library. Note the version 1 is no longer maintainted.
+To use this library for PHP 5.3+ until 5.6, use the version `1.*` of this library. Note the version 1 and 2 are no longer maintainted.
 
 ## Examples
 
