@@ -28,6 +28,7 @@ To use this library for PHP 5.3+ until 5.6, use the version `1.*` of this librar
 
 - [Fetch an API content throught GET](#fetch-an-api-content-through-get)
 - [Get the response as an array](#get-the-response-as-an-array)
+- [Get the HTTP status code](#get-the-http-status-code)
 
 ### Fetch an API content throught GET
 
@@ -83,4 +84,18 @@ suscipit recusandae consequuntur expedita et cum
 reprehenderit molestiae ut ut quas totam
 nostrum rerum est autem sunt rem eveniet architecto
 )
+```
+
+### Get the HTTP status code
+
+```php
+require(__DIR__ . '/../vendor/autoload.php');
+
+$response = pulsar()->get('https://jsonplaceholder.typicode.com/posts/1');
+
+echo $response->code();
+```
+
+```bash
+200
 ```

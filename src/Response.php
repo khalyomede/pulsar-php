@@ -16,6 +16,13 @@
      */
     class Response {
         /**
+         * Exists only for visual convenience.
+         * 
+         * @var int
+         */
+        const PATTERN_MATCHES = 1;
+
+        /**
          * Stores the raw result of the request to the API.
          * 
          * @var string
@@ -37,6 +44,13 @@
         protected $convert_to_array;
 
         /**
+         * True if the headers should be analyzed e.g. do a foreach and extract the correct parts from all the array items.
+         * 
+         * @var bool
+         */
+        protected $need_to_analyze_headers;
+
+        /**
          * Constructor.
          * 
          * @param string        $content    The content of the response after a request to the endpoint of the API.
@@ -46,6 +60,7 @@
             $this->content = $content;
             $this->headers = $headers;
             $this->convert_to_array = false;
+            $this->need_to_analyze_headers = true;
         }
 
         /**
@@ -60,8 +75,15 @@
             );
         }
 
+        /**
+         * Return the HTTP status code from the response of the requets to the API.
+         * 
+         * @return int
+         */
         public function code() {
-            return $this->headers;
+            $this->analyzeHeadersIfNeeded();
+
+            return (int) $this->code;
         }
 
         /**
@@ -73,6 +95,28 @@
             $this->convert_to_array = true;
             
             return $this;
+        }
+
+        /**
+         * Loop through each headers and extract the needed parts.
+         * 
+         * @return void
+         */
+        private function analyzeHeadersIfNeeded(): void {
+            if( $this->need_to_analyze_headers === true ) {
+                foreach( $this->headers as $header ) {
+                    $matches = [];
+    
+                    // HTTP Status code
+                    // HTTP response phrase
+                    if( preg_match('/^HTTP\/[1-2](?:[.][\d])?\s(\d{3})\s{0,1}(\w*)$/', $header, $matches) === static::PATTERN_MATCHES ) {
+                        $this->code = $matches[1];
+                        $this->response_phrase = $matches[2] ?? '';
+                    }
+                }
+
+                $this->need_to_analyze_headers = false;
+            }
         }
     }
 ?>

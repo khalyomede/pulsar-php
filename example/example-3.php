@@ -3,5 +3,5 @@
 
     $response = pulsar()->get('https://jsonplaceholder.typicode.com/posts/1');
 
-    print_r($response->code());
+    echo $response->code();
 ?>
