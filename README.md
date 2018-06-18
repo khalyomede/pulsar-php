@@ -6,6 +6,14 @@ API request and response, without using CURL.
 ![PHP from Packagist](https://img.shields.io/packagist/php-v/khalyomede/pulsar-php.svg)
 ![Packagist](https://img.shields.io/packagist/l/khalyomede/pulsar-php.svg)
 
+<div style="display: table; width: 100%; height: 90px;">
+    <div style="display: table-row; width: 100%; height: 100%;">
+        <div style="display: table-cell; vertical-align: middle; text-align: center;">
+            <img src="https://user-images.githubusercontent.com/15908747/41560722-4848ca90-7348-11e8-9918-d22340703b2c.png" height="90px" alt="Pulsar-PHP logo" />
+        </div>
+    </div>
+</div>
+
 ## Summary
 
 - [Installation](#installation)
