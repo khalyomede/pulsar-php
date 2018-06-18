@@ -34,7 +34,7 @@ To use this library for PHP 5.3+ until 5.6, use the version `1.*` of this librar
 ```php
 require(__DIR__ . '/../vendor/autoload.php');
 
-$content = pulsar()->get('https://jsonplaceholder.typicode.com/posts/1');
+$content = pulsar()->get('https://jsonplaceholder.typicode.com/posts/1')->content();
 
 print_r($content);
 ```
@@ -67,7 +67,7 @@ You can use the `toArray()` modifier for this purpose:
 ```php
 require(__DIR__ . '/../vendor/autoload.php');
 
-$array = pulsar()->toArray()->get('https://jsonplaceholder.typicode.com/posts/1');
+$array = pulsar()->toArray()->get('https://jsonplaceholder.typicode.com/posts/1')->content();
 
 print_r($array);
 ```
