@@ -6,6 +6,7 @@ API request and response, without using CURL.
 ![PHP from Packagist](https://img.shields.io/packagist/php-v/khalyomede/pulsar-php.svg)
 ![Packagist](https://img.shields.io/packagist/l/khalyomede/pulsar-php.svg)
 
+&nbsp;
 <div style="display: table; width: 100%; height: 90px;">
     <div style="display: table-row; width: 100%; height: 100%;">
         <div style="display: table-cell; vertical-align: middle; text-align: center;">
