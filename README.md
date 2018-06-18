@@ -17,7 +17,7 @@ API request and response, without using CURL.
 In your project, add the following dependency:
 
 ```bash
-composer require khalyomede/pulsar-php:2.*
+composer require khalyomede/pulsar-php:3.*
 ```
 
 ## PHP support
