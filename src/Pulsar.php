@@ -111,9 +111,11 @@
 		 * @return array<array>
 		 */
 		private function response(string $protocol, string $endpoint) {
+			$content = @file_get_contents($endpoint, static::DO_NOT_USE_INCLUDE_PATH, $this->context($protocol));
+
 			return [
-				'content' => file_get_contents($endpoint, static::DO_NOT_USE_INCLUDE_PATH, $this->context($protocol)),
-				'headers' => $http_response_header
+				'content' => $content ?: '{}',
+				'headers' => $http_response_header ?? []
 			];
 		}
 
@@ -127,7 +129,8 @@
 			$context = [
 				'http' => [
 					'method' => $protocol,
-					'header' => $this->headers($protocol)
+					'header' => $this->headers($protocol),
+					'ignore_errors' => true
 				],
 				'ssl' => [
 					'verify_peer' => false,

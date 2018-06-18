@@ -30,6 +30,7 @@ To use this library for PHP 5.3+ until 5.6, use the version `1.*` of this librar
 - [Get the response as an array](#get-the-response-as-an-array)
 - [Get the HTTP status code](#get-the-http-status-code)
 - [Sending a POST request](#sending-a-post-request)
+- [Sending a request to a non existing endpoint](#sending-a-request-to-a-non-existing-endpoint)
 
 ### Fetch an API content throught GET
 
@@ -135,4 +136,20 @@ stdClass Object
     [body] => Lorem ipsum
     [id] => 101
 )
+```
+
+### Sending a request to a non existing endpoint
+
+In this case, you will always get a `404` status code and an empty response.
+
+```php
+require(__DIR__ . '/../vendor/autoload.php');
+
+$response = pulsar()->get('https://a-non-existing-domain-hopefully.com/api/v1/post');
+
+echo $response->code();
+```
+
+```bash
+404
 ```

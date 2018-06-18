@@ -51,6 +51,13 @@
         protected $need_to_analyze_headers;
 
         /**
+         * Stores the HTTP response code of the response.
+         * 
+         * @var int|null
+         */
+        protected $code;
+
+        /**
          * Constructor.
          * 
          * @param string        $content    The content of the response after a request to the endpoint of the API.
@@ -61,6 +68,7 @@
             $this->headers = $headers;
             $this->convert_to_array = false;
             $this->need_to_analyze_headers = true;
+            $this->code = 404;
         }
 
         /**
@@ -109,7 +117,7 @@
     
                     // HTTP Status code
                     // HTTP response phrase
-                    if( preg_match('/^HTTP\/[1-2](?:[.][\d])?\s(\d{3})\s{0,1}(\w*)$/', $header, $matches) === static::PATTERN_MATCHES ) {
+                    if( preg_match('/^HTTP\/\d\.*\d*\s(\d{3})\s*([\w\s]+)$/', $header, $matches) === static::PATTERN_MATCHES ) {
                         $this->code = $matches[1];
                         $this->response_phrase = $matches[2] ?? '';
                     }

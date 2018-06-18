@@ -52,5 +52,17 @@
                 expect($response->toArray()->content())->toBe()->an('array');
             });
         });
+
+        describe('non existing endpoint', function() {
+            $response = pulsar()->get('https://non-existing.com/api/v1/post');
+
+            it('should always return a 404 when the endpoint does not exist', function() use($response) {
+                expect($response->code())->toBe()->equalTo(404);
+            });
+
+            it('should always return an empty object when the endpoint does not exist', function() use($response) {
+                expect($response->content())->toBe()->equalTo(new StdClass);
+            });
+        });
     });
 ?>
