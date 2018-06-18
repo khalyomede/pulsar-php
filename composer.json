@@ -14,5 +14,8 @@
         "files": [
             "src/function/pulsar.php"
         ]
+    },
+    "require-dev": {
+        "khalyomede/matcha": "0.*"
     }
 }
