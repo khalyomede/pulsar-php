@@ -20,6 +20,7 @@ API request and response, without using CURL.
 - [Installation](#installation)
 - [PHP support](#php-support)
 - [Examples](#examples)
+- [Credits](#credits)
 
 ## Installation
 
@@ -162,3 +163,7 @@ echo $response->code();
 ```bash
 404
 ```
+
+## Credits
+
+- Logo by [Anthony Ledoux](https://thenounproject.com/Vntole/) from [Noun Project](https://thenounproject.com/) (the current version is modified, this is the [original version](https://thenounproject.com/search/?q=black%20hole&i=1667364))
