@@ -27,6 +27,7 @@ To use this library for PHP 5.3+ until 5.6, use the version `1.*` of this librar
 ## Examples
 
 - [Fetch an API content throught GET](#fetch-an-api-content-through-get)
+- [Get the response as an array](#get-the-response-as-an-array)
 
 ### Fetch an API content throught GET
 
@@ -40,6 +41,39 @@ print_r($content);
 
 ```php
 stdClass Object
+(
+    [userId] => 1
+    [id] => 1
+    [title] => sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+    [body] => quia et suscipit
+suscipit recusandae consequuntur expedita et cum
+reprehenderit molestiae ut ut quas totam
+nostrum rerum est autem sunt rem eveniet architecto
+)
+```
+
+### Get the response as an array
+
+You can do so by using `->toArray()` modifier:
+
+```php
+require(__DIR__ . '/../vendor/autoload.php');
+```
+
+### Get the response as an array
+
+You can use the `toArray()` modifier for this purpose:
+
+```php
+require(__DIR__ . '/../vendor/autoload.php');
+
+$array = pulsar()->toArray()->get('https://jsonplaceholder.typicode.com/posts/1');
+
+print_r($array);
+```
+
+```php
+Array
 (
     [userId] => 1
     [id] => 1
