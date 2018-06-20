@@ -39,6 +39,7 @@ To use this library for PHP 5.3+ until 5.6, use the version `1.*` of this librar
 - [Sending a GET request](#sending-a-get-request)
 - [Sending a POST request](#sending-a-post-request)
 - [Sending a PATCH request](#sending-a-patch-request)
+- [Sending a PUT request](#sending-a-put-request)
 - [Sending a DELETE request](#sending-a-delete-request)
 - [Sending a request to a non existing endpoint](#sending-a-request-to-a-non-existing-endpoint)
 - [Get the response as an array](#get-the-response-as-an-array)
@@ -110,6 +111,28 @@ stdClass Object
   [name] => morpheus
   [job] => zion resident
   [updatedAt] => 2018-06-18T21:29:15.334Z
+)
+```
+
+### Sending a PUT request
+
+```php
+require(__DIR__ . '/../vendor/autoload.php');
+
+$response = pulsar()->data([
+    'name' => 'neo',
+    'job' => 'developer at Metacortex'
+])->put('https://reqres.in/api/users/2');
+
+print_r($response->content());
+```
+
+```php
+stdClass Object
+(
+    [name] => neo
+    [job] => developer at Metacortex
+    [updatedAt] => 2018-06-20T09:46:44.267Z
 )
 ```
 

@@ -35,6 +35,13 @@
 		const PROTOCOL_PATCH = 'PATCH';
 
 		/**
+		 * PUT protocol.
+		 * 
+		 * @var string
+		 */
+		const PROTOCOL_PUT = 'PUT';
+
+		/**
 		 * DELETE protocol.
 		 * 
 		 * @var string
@@ -97,6 +104,16 @@
 		 */
 		public function patch(string $endpoint): Response {
 			return $this->request(static::PROTOCOL_PATCH, $endpoint);
+		}
+
+		/**
+		 * Send a PUT request to the endpoint.
+		 * 
+		 * @param string 	$endpoint	The URL to request.
+		 * @return Khalyomede\Response
+		 */
+		public function put(string $endpoint): Response {
+			return $this->request(static::PROTOCOL_PUT, $endpoint);
 		}
 
 		/**
@@ -172,7 +189,7 @@
 				]
 			];
 
-			if( $protocol === static::PROTOCOL_POST || $protocol === static::PROTOCOL_PATCH ) {
+			if( $protocol === static::PROTOCOL_POST || $protocol === static::PROTOCOL_PATCH || $protocol === static::PROTOCOL_PUT ) {
 				$context['http']['content'] = http_build_query($this->data);
 			}
 
@@ -190,7 +207,7 @@
 				'Accept' => static::MIME_JSON
 			];
 
-			if( $protocol === static::PROTOCOL_POST || $protocol === static::PROTOCOL_PATCH ) {
+			if( $protocol === static::PROTOCOL_POST || $protocol === static::PROTOCOL_PATCH || $protocol === static::PROTOCOL_PUT ) {
 				$data = http_build_query($this->data);
 
 				$headers['Content-type'] = 'application/x-www-form-urlencoded';

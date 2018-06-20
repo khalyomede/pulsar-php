@@ -104,5 +104,17 @@
                 expect($response->toArray()->content())->toBe()->equalTo([]);
             });
         });
+
+        describe('put', function() {
+            $response = pulsar()->data(['name' => 'Neo', 'job' => 'developer at Metacortex'])->put('https://reqres.in/api/users/2');
+
+            it('should return a 200', function() use($response) {
+                expect($response->code())->toBe()->equalTo(200);
+            });
+
+            it('should return an object', function() use($response) {
+                expect($response->content())->toBe()->an('object');
+            });
+        });
     });
 ?>
